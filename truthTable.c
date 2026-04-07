@@ -30,19 +30,12 @@ void prntIndex(short s, short e, bool *ptr) {
 		printf("%d\t", ptr[i]);
 }
 //What the hell
-void increment(bool *ptr, short size) {
-	short carry = 1;
-	for (int i = size-1; i >= 0; i--) {
-		if (carry == 0)
-			break;
-		if (ptr[i] == 0 && carry > 0) {
-			ptr[i] = 1;
-			carry--;
+void increment(bool *ptr, short size, short bit) {
+	size--;
+	for (int i = size; i >= 0; i--) {
+			ptr[i] = (bit) & 1; // GET LSB
+			bit = bit >> 1;
 		}
-		else if (ptr[i] == 1 && carry > 0) {
-			ptr[i] = 0;
-		}
-	}
 }
 //Main
 int main() {
@@ -56,9 +49,9 @@ int main() {
 	// Begin counting, for N variables there is 2^n rows i guess
 	rows = pow(2,N);
 	for (int i = 0; i < rows; i++) {
+	increment(digits,N, i);
 	prntIndex(0,N-1,digits);
 	printf("\n");
-	increment(digits,N);
 	}
 	free(digits);
 
