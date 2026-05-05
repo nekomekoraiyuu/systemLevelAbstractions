@@ -3,9 +3,11 @@ using namespace std;
 
 int main()
 {
-    int a[5] = {1};
+    int num;
+    cin >> num;
+    int a[num] = {1};
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < num; i++)
     {
         for (int j = i; j > 0; j--)
         {
